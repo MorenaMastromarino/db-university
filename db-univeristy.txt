@@ -1,0 +1,65 @@
+Query con SELECT
+
+1.
+SELECT *
+FROM `students`
+WHERE `date_of_birth` LIKE '1990-%';
+
+2.
+SELECT *
+FROM `courses`
+WHERE `cfu` > '10';
+
+3.
+SELECT *
+FROM `students` 
+WHERE (YEAR(CURRENT_DATE) - YEAR(`date_of_birth`)) > '30';
+
+4.
+SELECT * 
+FROM `courses`
+WHERE `period` = 'I semestre'
+AND `year` = '1';
+
+5.
+SELECT *
+FROM `exams` 
+WHERE `date` = '2020/06/20'
+AND `hour` > '14:00:00';
+
+6.
+SELECT * 
+FROM `degrees`
+WHERE `level` = 'magistrale';
+
+7.
+SELECT COUNT(*) AS `numero_dipartimenti`
+FROM `departments`;
+
+8.
+SELECT COUNT(*) AS `insegnati_senza_telefono`
+FROM `teachers`
+WHERE `phone` IS NULL;
+
+
+Query con GROUP BY
+
+1.
+SELECT COUNT(*) as `iscritti_per_anno`, YEAR(`enrolment_date`) AS `anno`
+FROM `students`
+GROUP BY YEAR(`enrolment_date`);
+
+2.
+SELECT COUNT(*) as `insegnanti_per_edificio`, `office_address` AS `edificio`
+FROM `teachers`
+GROUP BY `office_address`;
+
+3.
+SELECT `exam_id` AS `appello`, AVG(`vote`) AS `media_voti`
+FROM `exam_student` 
+GROUP BY `exam_id`;
+
+4.		
+SELECT COUNT(*) AS `corsi_per_dipartimento`, `department_id` AS `dipartimento`
+FROM `degrees` 
+GROUP BY `department_id`;
